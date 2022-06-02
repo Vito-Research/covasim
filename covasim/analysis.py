@@ -14,7 +14,7 @@ from . import interventions as cvi
 from . import plotting as cvpl
 from . import run as cvr
 from .settings import options as cvo # For setting global options
-
+import streamlit as st
 
 __all__ = ['Analyzer', 'snapshot', 'age_histogram', 'daily_age_stats', 'daily_stats', 'nab_histogram',
            'Fit', 'Calibration', 'TransTree']
@@ -1568,6 +1568,7 @@ class Calibration(Analyzer):
             print(f'\nMismatch before calibration: {before:n}')
             print(f'Mismatch after calibration:  {after:n}')
             print(f'Percent improvement:         {((before-after)/before)*100:0.1f}%')
+            st.metric("Percent improvement", f'{((before-after)/before)*100:0.1f}%')
             return before, after
         else:
             print('Calibration not yet run; please run calib.calibrate()')
